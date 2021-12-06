@@ -4,11 +4,12 @@ typedef struct user_info user_info;
 
 struct user_info
 {
-    char usr[128];
-    char pwd[128];
+    char usr[256];
+    char pwd[256];
     char host[256];
-    char path[240];
-    char ip[128];
-    char f_name[128];
-    char hostname[128];
+    char port[256];
+    char path[256];
+    char ip[256];
+    char f_name[256];
+    char hostname[256];
 };
