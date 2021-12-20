@@ -27,22 +27,6 @@ int init_connection(user_info * user_info){
     return 0;
 }
 
-int test_SendMsg(){
-    char buf[] = "Mensagem de teste na travessia da pilha TCP/IP\n";
-    size_t bytes;
-
-    /*send a string to the server*/
-    bytes = write(socket_fd, buf, strlen(buf));
-    if (bytes > 0)
-        printf("Bytes escritos %ld\n", bytes);
-    else {
-        perror("write()");
-        return -1;
-    }
-
-    return 0;
-}
-
 int send_req(){
     return -1;
 }

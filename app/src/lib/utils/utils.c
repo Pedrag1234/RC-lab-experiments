@@ -54,6 +54,8 @@ int argsParser(char * params, user_info * user_info){
         return -1;
     }
     
+    user_info->port = DEFAULT_PORT;
+
     getFileName(user_info);
     getIp(user_info);
 
@@ -66,7 +68,7 @@ void printUserInfo(user_info * user_info){
     printf("INFO:\n");
     printf("Username : %s \t Password : %s\n", user_info->usr,user_info->pwd);
     printf("Host Name : %s \t Path : %s\n", user_info->hostname,user_info->path);
-    printf("Host : %s \t IP : %s \n",user_info->host,user_info->ip);
+    printf("Host : %s \t IP : %s \t Port : %d \n",user_info->host,user_info->ip,user_info->port);
     printf("File Name : %s\n",user_info->f_name);
     printf("*********************************************************************************\n");
 }
