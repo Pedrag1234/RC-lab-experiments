@@ -65,7 +65,7 @@ void printUserInfo(user_info * user_info){
     printf("USER INFO:\n");
     printf("Username : %s \t Password : %s\n", user_info->usr,user_info->pwd);
     printf("Host Name : %s \t Path : %s\n", user_info->hostname,user_info->path);
-    printf("Host : %s \t IP : %s \n",user_info->host,user_info->ip)
+    printf("Host : %s \t IP : %s \n",user_info->host,user_info->ip);
     printf("********************************************************\n");
 }
 
@@ -77,8 +77,8 @@ int getIp(user_info * user_info){
         herror("gethostbyname()");
         return -1;
     }
-    //strcpy(user_info->host,h->h_name);
-    strcpy(user_info->ip, inet_ntoa( *( (struct in_addr *)h->h_addr ) ));
+    strcpy(user_info->host,(char*)h->h_name);
+    strcpy(user_info->ip, inet_ntoa( *( (struct in_addr *)h->h_addr_list[0] ) ));
     return 0;
 }
 
