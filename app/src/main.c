@@ -1,14 +1,23 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "api/connection/connection.h"
+#include "lib/utils/utils.h"
+#include "lib/macros.h"
+#include "lib/types.h"
+
 int main(int argc, char const *argv[])
 {
-    int i;
-    printf("%d\n",argc);
-    for(i=1;i<argc;i++)
+    if (argc != 2)
     {
-        printf("%s",argv[i]);
+        //fprintf(stderr,"")
+        exit(1);
     }
+    user_info Uinfo;
+
+    argsParser(argv[1],&Uinfo);
+
+    printUserInfo(&Uinfo);
 
     return 0;
 }

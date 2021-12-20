@@ -10,8 +10,11 @@
 
 
 #include "../types.h"
+#include "../macros.h"
 
 int argsParser(char * params, user_info * user_info);
+
+void printUserInfo( user_info * user_info);
 
 int getIp(user_info * user_info);
 
