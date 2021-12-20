@@ -54,6 +54,7 @@ int argsParser(char * params, user_info * user_info){
         return -1;
     }
     
+    getFileName(user_info);
     getIp(user_info);
 
     return 0;
@@ -61,12 +62,13 @@ int argsParser(char * params, user_info * user_info){
 
 void printUserInfo(user_info * user_info){
 
-    printf("********************************************************\n");
-    printf("USER INFO:\n");
+    printf("*********************************************************************************\n");
+    printf("INFO:\n");
     printf("Username : %s \t Password : %s\n", user_info->usr,user_info->pwd);
     printf("Host Name : %s \t Path : %s\n", user_info->hostname,user_info->path);
     printf("Host : %s \t IP : %s \n",user_info->host,user_info->ip);
-    printf("********************************************************\n");
+    printf("File Name : %s\n",user_info->f_name);
+    printf("*********************************************************************************\n");
 }
 
 int getIp(user_info * user_info){
@@ -83,5 +85,18 @@ int getIp(user_info * user_info){
 }
 
 int getFileName(user_info * user_info){
+    char temp[256];
+    strcpy(temp,user_info->path);
+
+    char filename[256];
+    char * token = strtok(temp,"/");
+    while (token != NULL)
+    {
+        strcpy(filename,token);
+        token = strtok(NULL,"/");
+    }
+    
+    strcpy(user_info->f_name,filename);
+
     return -1;
 }
