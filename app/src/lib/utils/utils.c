@@ -1,7 +1,5 @@
 #include "utils.h"
 
-
-
 int argsParser(char * params, user_info * user_info){
 
     char* type = strtok(params, "/");

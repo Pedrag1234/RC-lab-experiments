@@ -15,9 +15,14 @@ int main(int argc, char const *argv[])
     }
     user_info Uinfo;
 
-    argsParser(argv[1],&Uinfo);
+    if(argsParser(argv[1],&Uinfo) != 0){
+        exit(-1)
+    }
 
     printUserInfo(&Uinfo);
+    //  TODO:  login here
+
+    
 
     return 0;
 }
