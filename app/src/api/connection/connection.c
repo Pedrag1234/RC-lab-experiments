@@ -29,7 +29,7 @@ int init_connection(user_info * user_info){
 
 int send_req(user_info * user_info, char * command, size_t size, int socket_fd){
 
-    int bytes = write(socket_fd, command, size);
+    int bytes = send(socket_fd, command, size,0);
 
     if (bytes > 0)
         printf("Number of bytes written %ld\n", bytes);
@@ -44,27 +44,30 @@ int send_req(user_info * user_info, char * command, size_t size, int socket_fd){
 char * read_res(user_info * user_info, int socket_fd){
 
     bool reading_finished = false; 
-    char temp[1];
-
+    int count = 0;
     char res[256];
-    int size = 1;
 
     while (!reading_finished)
     {
-        if(read(socket_fd, temp, 1) > 0){
-            int last_pos = size - 1;
-
-            res[last_pos] = temp;
-            size++;
-
-            if (temp == "\n")
-                reading_finished = true;
+        if(recv(socket_fd, res, 256,0) > 0){
+            printf("Response - %s\n",res);
+            reading_finished = true;
+        }
+        else{
+            count++;
+            printf("No Response\n");
+            if (count > 3)
+            {
+                printf("Aborting\n");
+                exit(-1);
+            }
+            
         }
     }
 
-    printf("Response - %s\n",res);
+    
 
-    return 0;
+    return res;
 }
 
 int close_connection(int socket_fd){
