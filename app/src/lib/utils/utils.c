@@ -100,19 +100,7 @@ int getFileName(user_info * user_info){
     return -1;
 }
 
-char *my_itoa(int num)
+void my_itoa(const int num, char *str)
 {
-    printf('\nmy_itoa.1\n');
-
-    size_t ENOUGH = (int)((ceil(log10(num))+1)*sizeof(char));
-
-    printf('\nmy_itoa.2\n');
-
-    char str[ENOUGH];
-
-    sprintf(str, "%d", 42);
-
-    printf('\nmy_itoa.3\n');
-
-    return str;
+    sprintf(str, "%d", num);
 }

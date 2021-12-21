@@ -1,7 +1,8 @@
 #include "connection.h"
 
 
-int init_connection(user_info * user_info){
+int init_connection(user_info * user_info)
+{
     struct sockaddr_in server_addr;
     int socket_fd;
 
@@ -9,72 +10,88 @@ int init_connection(user_info * user_info){
     bzero((char *) &server_addr, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
     server_addr.sin_addr.s_addr = inet_addr(user_info->ip);    /*32 bit Internet address network byte ordered*/
-    server_addr.sin_port = htons(user_info->port);        /*server TCP port must be network byte ordered */
+    server_addr.sin_port = htons(user_info->port);             /*server TCP port must be network byte ordered */
 
     /*open a TCP socket*/
     if ((socket_fd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-        perror("socket()");
-        return -1;
-    }
-    /*connect to the server*/
-    if (connect(socket_fd,
-                (struct sockaddr *) &server_addr,
-                sizeof(server_addr)) < 0) {
-        perror("connect()");
-        return -1;
+        perror("connection.error.socket_open");
+        exit(-1);
     }
 
+    /*connect to the server*/
+    if (connect(socket_fd, (struct sockaddr *) &server_addr, sizeof(server_addr)) < 0) {
+        perror("connection.error.server_connect");
+        exit(-1);
+    }
+
+    printf("\nconnection.info.open.success: {socket_fd: %d}\n", socket_fd);
     return socket_fd;
 }
 
-int send_req(user_info * user_info, char * command, size_t size, int socket_fd){
+int send_req(
+    const char *cmd, 
+    const size_t cmd_len, 
+    const int socket_fd
+){
+    int bytes = write(socket_fd, cmd, cmd_len);
 
-    int bytes = send(socket_fd, command, size,0);
-
-    if (bytes > 0)
-        printf("Number of bytes written %ld\n", bytes);
-    else {
-        perror("connection.writing_bytes");
+    if (bytes < 0) {
+        perror("connection.error.send_request");
         return -1;
     }
+
+    printf("\nconnection.info.request_sent: {socket_fd: %d, cmd: %s}\n", socket_fd, cmd);
+
+    sleep(1); 
+    fsync(socket_fd);
 
     return 0;
 }
 
-char * read_res(user_info * user_info, int socket_fd){
-
-    bool reading_finished = false; 
-    int count = 0;
-    char res[256];
-
-    while (!reading_finished)
-    {
-        if(recv(socket_fd, res, 256,0) > 0){
-            printf("Response - %s\n",res);
-            reading_finished = true;
-        }
-        else{
-            count++;
-            printf("No Response\n");
-            if (count > 3)
-            {
-                printf("Aborting\n");
-                exit(-1);
-            }
-            
-        }
-    }
-
+int read_res(int socket_fd, char *res)
+{
+    char buf[1]; 
+    int i = 0;
     
+    size_t bytes = read(socket_fd, buf, 1);
 
-    return res;
-}
-
-int close_connection(int socket_fd){
-    if (close(socket_fd) < 0) {
-        perror("close()");
+    if(bytes < 0) {
+        perror("connection.error.read_response");
         return -1;
     }
 
+    res[i++] = buf[0];
+
+    while(buf[0] != '\n') {
+        bytes = read(socket_fd, buf, 1);
+        
+        if(bytes < 0){
+            perror("connection.error.read_response");
+            return -1;
+        }
+        
+        if(bytes == 0) 
+            break;
+
+        res[i++] = buf[0];
+    }
+    res[i] = '\0';
+
+    printf("\nconnection.info.response_read: {socket_fd: %d, res: %s}\n", socket_fd, res);
+
+    sleep(1); 
+    fsync(socket_fd);
+
+    return 0;
+}
+
+int close_connection(int socket_fd)
+{
+    if (close(socket_fd) < 0) {
+        perror("connection.error.close_connection");
+        return -1;
+    }
+
+    printf("\nconnection.info.close.success: {socket_fd: %d}\n", socket_fd);
     return 0;
 }

@@ -22,4 +22,4 @@ int getIp(user_info * user_info);
 
 int getFileName(user_info * user_info);
 
-char *my_itoa(int num);
+void my_itoa(const int num, char *str);

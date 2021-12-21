@@ -12,8 +12,8 @@
 
 int init_connection(user_info * user_info);
 
-int send_req(user_info * user_info, char * command, size_t size, int socket_fd);
+int send_req(const char * cmd, const size_t cmd_len, const int socket_fd);
 
-char* read_res(user_info * user_info, int socket_fd);
+int read_res(const int socket_fd, char *res);
 
 int close_connection();

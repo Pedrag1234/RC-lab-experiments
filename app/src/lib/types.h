@@ -10,7 +10,7 @@ enum res_t {
     NEED_PASSWORD = 331,
     LOGIN_SUCCESS = 230,
     PASSIVE_MODE = 227,
-
+    WELCOME = 220
 };
 
 struct user_info

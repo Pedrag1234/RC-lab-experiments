@@ -22,9 +22,8 @@ int main(int argc, char const *argv[])
 
     printUserInfo(&user_info);
 
-    int fdsocket = init_connection(&user_info);
-    auth_login(fdsocket, &user_info);
-    
+    int fd = init_connection(&user_info);
+    auth_login(fd, &user_info);
 
     return 0;
 }
