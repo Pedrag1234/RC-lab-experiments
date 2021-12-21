@@ -55,7 +55,7 @@ int read_res(int socket_fd, char *res)
     
     size_t bytes = read(socket_fd, buf, 1);
 
-    if(bytes < 0) {
+    if(bytes < 0) { 
         perror("connection.error.read_response");
         return -1;
     }
