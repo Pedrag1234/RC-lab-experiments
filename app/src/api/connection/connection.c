@@ -27,35 +27,48 @@ int init_connection(user_info * user_info){
     return socket_fd;
 }
 
-int send_req(user_info * user_info, char * command, int size, int socket_fd){
+int send_req(user_info * user_info, char * command, size_t size, int socket_fd){
 
     int bytes = write(socket_fd, command, size);
 
     if (bytes > 0)
         printf("Number of bytes written %ld\n", bytes);
     else {
-        perror("write()");
+        perror("connection.writing_bytes");
         return -1;
     }
 
     return 0;
 }
 
-int read_rep(user_info * user_info, int socket_fd, char * reply){
+char * read_res(user_info * user_info, int socket_fd){
 
     bool reading_finished = false; 
-    
-    while (reading_finished)
-    {
-        /* code */
-    }
-    
+    char temp[1];
 
-    return -1;
+    char res[256];
+    int size = 1;
+
+    while (!reading_finished)
+    {
+        if(read(socket_fd, temp, 1) > 0){
+            int last_pos = size - 1;
+
+            res[last_pos] = temp;
+            size++;
+
+            if (temp == "\n")
+                reading_finished = true;
+        }
+    }
+
+    printf("Response - %s\n",res);
+
+    return 0;
 }
 
-int close_connection(){
-    if (close(socket_fd)<0) {
+int close_connection(int socket_fd){
+    if (close(socket_fd) < 0) {
         perror("close()");
         return -1;
     }

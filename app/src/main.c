@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "api/connection/connection.h"
-#include "lib/utils/utils.h"
 #include "lib/macros.h"
 #include "lib/types.h"
+#include "lib/utils/utils.h"
+#include "api/connection/connection.h"
+#include "middleware/auth/auth.h"
 
 int main(int argc, char const *argv[])
 {
@@ -13,15 +14,16 @@ int main(int argc, char const *argv[])
         //fprintf(stderr,"")
         exit(1);
     }
-    user_info Uinfo;
+    user_info user_info;
 
-    if(argsParser(argv[1],&Uinfo) != 0){
-        exit(-1)
+    if(argsParser(argv[1],&user_info) != 0){
+        exit(-1);
     }
 
-    printUserInfo(&Uinfo);
-    //  TODO:  login here
+    printUserInfo(&user_info);
 
+    int fdsocket = init_connection(&user_info);
+    auth_login(fdsocket, &user_info);
     
 
     return 0;

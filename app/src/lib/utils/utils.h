@@ -1,5 +1,6 @@
 #pragma once
 
+#include <math.h>
 #include <stdio.h>
 #include <string.h>
 #include <sys/socket.h>
@@ -20,3 +21,5 @@ void printUserInfo( user_info * user_info);
 int getIp(user_info * user_info);
 
 int getFileName(user_info * user_info);
+
+char *my_itoa(int num);

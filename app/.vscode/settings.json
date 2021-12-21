@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "connection.h": "c",
+    "cstring": "c",
+    "utils.h": "c"
+  }
+}
