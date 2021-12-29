@@ -43,7 +43,7 @@ int send_req(
     printf("\nconnection.info.request_sent: {socket_fd: %d, cmd: %s}\n", socket_fd, cmd);
 
     sleep(1); 
-    fsync(socket_fd);
+    //fsync(socket_fd);
 
     return 0;
 }
@@ -79,8 +79,7 @@ int read_res(int socket_fd, char *res)
 
     printf("\nconnection.info.response_read: {socket_fd: %d, res: %s}\n", socket_fd, res);
 
-    sleep(1); 
-    fsync(socket_fd);
+    //fsync(socket_fd);
 
     return 0;
 }

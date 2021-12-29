@@ -14,8 +14,12 @@ void auth_request(
     perror("auth.error.bad_request");
     exit(-1);
   }
-
-  read_res(socket_fd, res);
+  do
+  {
+    read_res(socket_fd, res);
+  } while (res[3] != ' ');
+  
+  
   snprintf(code, FTP_RES_SIZE, "%s", res);
   
   if (auth_validate(code, req_type) < 0) {

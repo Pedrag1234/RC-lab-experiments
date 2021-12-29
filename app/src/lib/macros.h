@@ -6,7 +6,7 @@
 #define FTP_RES_SIZE 4
 #define FTP_TYPE "ftp:"
 
-#define DEFAULT_USR "rcom"
-#define DEFAULT_PWD "rcom"
+#define DEFAULT_USR "anonymous"
+#define DEFAULT_PWD "qualquer-password"
 
 #define DEFAULT_PORT 21
