@@ -14,3 +14,6 @@ int auth_login(const int socket_fd, user_info *user_info);
 int auth_validate(char *res, const res_t code);
 
 void auth_request(user_info *user_info, const char *cmd, const size_t cmd_len, const res_t req_type, const int socket_fd);
+
+void auth_passive(user_info *user_info, const char *cmd, const size_t cmd_len, const res_t req_type, const int socket_fd, char *ip,
+  int *port);
