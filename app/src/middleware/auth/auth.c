@@ -57,7 +57,25 @@ int auth_login(const int socket_fd, user_info *user_info)
   sprintf(usr_cmd, "user %s\r\n", user_info->usr);
   sprintf(pwd_cmd, "pass %s\r\n", user_info->pwd);
 
-  auth_request(user_info, welcome_cmd, BUFFER_SIZE, WELCOME, socket_fd);
+  //auth_request(user_info, welcome_cmd, BUFFER_SIZE, WELCOME, socket_fd);
+  char res[BUFFER_SIZE];
+  char code[FTP_RES_SIZE];
+
+  do
+  {
+    read_res(socket_fd, res);
+  } while (res[3] != ' ');
+
+  snprintf(code, FTP_RES_SIZE, "%s", res);
+  
+  if (auth_validate(code, WELCOME) < 0) {
+    printf("code >> %s\n", code);
+    printf("req_type >> %d\n", WELCOME);
+    perror("auth.error.no_validate");
+    exit(-1);
+  }
+
+
   auth_request(user_info, usr_cmd, USR_CMD_LENGTH, NEED_PASSWORD, socket_fd);
   auth_request(user_info, pwd_cmd, PWD_CMD_LENGTH, LOGIN_SUCCESS, socket_fd);
 
