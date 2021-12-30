@@ -51,12 +51,11 @@ int auth_login(const int socket_fd, user_info *user_info)
     exit(-1);
   }
 
-  const size_t USR_CMD_LENGTH = strlen(user_info->usr) + 8;
-  const size_t PWD_CMD_LENGTH = strlen(user_info->pwd) + 8;
+
 
   char welcome_cmd[BUFFER_SIZE] = "telnet ftp.up.pt 21";
-  char usr_cmd[USR_CMD_LENGTH];
-  char pwd_cmd[PWD_CMD_LENGTH];
+  char usr_cmd[BUFFER_SIZE];
+  char pwd_cmd[BUFFER_SIZE];
 
   sprintf(usr_cmd, "USER %s\r\n", user_info->usr);
   sprintf(pwd_cmd, "PASS %s\r\n", user_info->pwd);
@@ -83,8 +82,8 @@ int auth_login(const int socket_fd, user_info *user_info)
   memset(code, 0, FTP_RES_SIZE);
 
 
-  auth_request(user_info, usr_cmd, USR_CMD_LENGTH, NEED_PASSWORD, socket_fd);
-  auth_request(user_info, pwd_cmd, PWD_CMD_LENGTH, LOGIN_SUCCESS, socket_fd);
+  auth_request(user_info, usr_cmd, strlen(usr_cmd), NEED_PASSWORD, socket_fd);
+  auth_request(user_info, pwd_cmd, strlen(pwd_cmd), LOGIN_SUCCESS, socket_fd);
 
   printf("auth.info.login_success\n");
 
