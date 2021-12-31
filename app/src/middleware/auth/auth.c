@@ -19,12 +19,9 @@ void auth_request(
     read_res(socket_fd, res);
   } while (res[3] != ' ');
   
-  
   snprintf(code, FTP_RES_SIZE, "%s", res);
   
   if (auth_validate(code, req_type) < 0) {
-    printf("code >> %s\n", code);
-    printf("req_type >> %d\n", req_type);
     perror("auth.error.no_validate");
     exit(-1);
   }
@@ -51,16 +48,12 @@ int auth_login(const int socket_fd, user_info *user_info)
     exit(-1);
   }
 
-
-
-  char welcome_cmd[BUFFER_SIZE] = "telnet ftp.up.pt 21";
   char usr_cmd[BUFFER_SIZE];
   char pwd_cmd[BUFFER_SIZE];
 
   sprintf(usr_cmd, "USER %s\r\n", user_info->usr);
   sprintf(pwd_cmd, "PASS %s\r\n", user_info->pwd);
 
-  //auth_request(user_info, welcome_cmd, BUFFER_SIZE, WELCOME, socket_fd);
   char res[BUFFER_SIZE];
   char code[FTP_RES_SIZE];
 
@@ -72,15 +65,12 @@ int auth_login(const int socket_fd, user_info *user_info)
   snprintf(code, FTP_RES_SIZE, "%s", res);
   
   if (auth_validate(code, WELCOME) < 0) {
-    printf("code >> %s\n", code);
-    printf("req_type >> %d\n", WELCOME);
     perror("auth.error.no_validate");
     exit(-1);
   }
 
   memset(res, 0, BUFFER_SIZE);
   memset(code, 0, FTP_RES_SIZE);
-
 
   auth_request(user_info, usr_cmd, strlen(usr_cmd), NEED_PASSWORD, socket_fd);
   auth_request(user_info, pwd_cmd, strlen(pwd_cmd), LOGIN_SUCCESS, socket_fd);
@@ -98,8 +88,7 @@ void auth_passive(
   const int socket_fd,
   char *ip,
   int *port
-  )
-{
+){
   char res[BUFFER_SIZE];
   char code[FTP_RES_SIZE];
 
@@ -116,8 +105,6 @@ void auth_passive(
   snprintf(code, FTP_RES_SIZE, "%s", res);
   
   if (auth_validate(code, req_type) < 0) {
-    printf("code >> %s\n", code);
-    printf("req_type >> %d\n", req_type);
     perror("auth.error.no_validate");
     exit(-1);
   }
