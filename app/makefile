@@ -1,6 +1,6 @@
 # compiler
 CXX = gcc
-CXXFLAGS = -Wall -Wextra -Wfloat-equal -pedantic -Wundef -Wswitch-default -Wunreachable-code -lm -std=c17
+CXXFLAGS = -Wall -Wextra -Wfloat-equal -pedantic -Wundef -Wswitch-default -Wunreachable-code -lm -std=c11
 LDFLAGS = -g -I./src
 LBLIBS = 
 BUILD_PATH = build

@@ -7,6 +7,6 @@
 #define FTP_TYPE "ftp:"
 
 #define DEFAULT_USR "anonymous"
-#define DEFAULT_PWD "qualquer-password"
+#define DEFAULT_PWD "anonymous--pwd"
 
 #define DEFAULT_PORT 21
