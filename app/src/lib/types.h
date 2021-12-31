@@ -4,6 +4,12 @@
 
 typedef struct user_info user_info;
 typedef enum res_t res_t;
+typedef enum ftp_mode_t ftp_mode_t;
+
+enum ftp_mode_t {
+    ACTIVE,
+    PASV
+};
 
 enum res_t {
     CONFIRM = 2,
@@ -23,4 +29,5 @@ struct user_info
     char ip[BUFFER_SIZE];
     char f_name[BUFFER_SIZE];
     char hostname[BUFFER_SIZE];
+    ftp_mode_t ftp_mode;
 };

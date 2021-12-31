@@ -9,4 +9,5 @@
 #define DEFAULT_USR "anonymous"
 #define DEFAULT_PWD "anonymous--pwd"
 
-#define DEFAULT_PORT 21
+#define FTP_SERVER_PORT 21 
+#define FTP_DATA_PORT 20

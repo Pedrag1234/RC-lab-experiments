@@ -1,6 +1,5 @@
 #include "connection.h"
 
-
 int init_connection(user_info * user_info)
 {
     struct sockaddr_in server_addr;
@@ -43,7 +42,6 @@ int send_req(
     printf("\nconnection.info.request_sent: {socket_fd: %d, cmd: %s}\n", socket_fd, cmd);
 
     sleep(1); 
-    //fsync(socket_fd);
 
     return 0;
 }
@@ -78,8 +76,6 @@ int read_res(int socket_fd, char *res)
     res[i] = '\0';
 
     printf("\nconnection.info.response_read: {socket_fd: %d, res: %s}\n", socket_fd, res);
-
-    //fsync(socket_fd);
 
     return 0;
 }

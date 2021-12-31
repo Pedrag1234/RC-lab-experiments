@@ -7,7 +7,7 @@
 
 #include "../../lib/types.h"
 #include "../../lib/utils/utils.h"
-#include "../../api/connection/connection.h"
+#include "../connection/connection.h"
 
 int auth_login(const int socket_fd, user_info *user_info);
 
