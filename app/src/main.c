@@ -11,9 +11,10 @@ int main(int argc, char const *argv[])
 {
     if (argc != 2)
     {
-        //fprintf(stderr,"")
+        // fprintf(stderr,"")
         exit(1);
     }
+
     user_info user_info;
 
     if(argsParser(argv[1],&user_info) != 0){
