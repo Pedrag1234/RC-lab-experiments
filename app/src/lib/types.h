@@ -3,6 +3,8 @@
 #include "macros.h"
 
 typedef struct user_info user_info;
+typedef struct client_info client_info;
+
 typedef enum res_t res_t;
 typedef enum ftp_mode_t ftp_mode_t;
 
@@ -17,6 +19,15 @@ enum res_t {
     LOGIN_SUCCESS = 230,
     PASSIVE_MODE = 227,
     WELCOME = 220
+};
+
+struct client_info {
+    int ip1;
+    int ip2;
+    int ip3;
+    int ip4;
+    int port1;
+    int port2;
 };
 
 struct user_info

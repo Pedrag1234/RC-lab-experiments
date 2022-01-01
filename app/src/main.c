@@ -32,10 +32,10 @@ int main(int argc, char const *argv[])
 
     switch (selected_mode) {
         case ACTIVE:
-            // active_connect(&user_info);
+            // active_download(&user_info);
             break;
         default:
-            pasv_connect(&user_info);
+            pasv_download(&user_info);
             break;
     }
 
