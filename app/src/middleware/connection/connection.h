@@ -10,7 +10,7 @@
 
 #include "../../lib/types.h"
 
-int init_connection(user_info * user_info);
+int init_connection(char *ip, int port);
 
 int send_req(const char * cmd, const size_t cmd_len, const int socket_fd);
 

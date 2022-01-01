@@ -34,6 +34,8 @@ char *auth_request(
 
 int auth_validate(char *res, const res_t code)
 {
+  if (code == NOOP) return 0;
+
   char code_str[FTP_RES_SIZE];
   my_itoa(code, code_str);
 

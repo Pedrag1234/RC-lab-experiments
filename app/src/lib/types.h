@@ -14,11 +14,12 @@ enum ftp_mode_t {
 };
 
 enum res_t {
-    CONFIRM = 2,
+    CONFIRM = 200,
     NEED_PASSWORD = 331,
     LOGIN_SUCCESS = 230,
     PASSIVE_MODE = 227,
-    WELCOME = 220
+    WELCOME = 220,
+    NOOP = 404
 };
 
 struct client_info {
