@@ -108,5 +108,8 @@ int pasv_download(user_info *user_info)
 
   printf("\npassive.info.download_ended\n");
 
+  close_connection(server_fd);
+  close_connection(data_fd);
+
   return 0;
 }

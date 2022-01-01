@@ -1,10 +1,13 @@
-#include "api/active/active.h"
 #include "api/passive/pasv.h"
 
 int main(int argc, char const *argv[])
 {
-    if (argc < 2)
-    {
+    char *token;
+
+    bool is_active = false;
+    bool is_pasv = false;
+
+    if (argc < 2) {
         perror("app.error.args_missing");
         exit(1);
     }
@@ -18,12 +21,13 @@ int main(int argc, char const *argv[])
     }
 
     printUserInfo(&user_info);
+    
+    if (argc > 2) {
+        token = strtok(argv[2], "-");
 
-    char *token;
-    token = strtok(argv[2], "-");
-
-    bool is_active = strcmp(token, "A") == 0;
-    bool is_pasv = strcmp(token, "P") == 0; 
+        is_active = strcmp(token, "A") == 0;
+        is_pasv = strcmp(token, "P") == 0; 
+    }
 
     if (!is_pasv && !is_active)
         selected_mode = PASV;
