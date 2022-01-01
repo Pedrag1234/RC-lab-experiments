@@ -14,6 +14,7 @@ void auth_request(
     perror("auth.error.bad_request");
     exit(-1);
   }
+
   do
   {
     read_res(socket_fd, res);
@@ -41,19 +42,8 @@ int auth_validate(char *res, const res_t code)
   return 0;
 }
 
-int auth_login(const int socket_fd, user_info *user_info)
+void auth_welcome(const int socket_fd)
 {
-  if (user_info->usr == NULL || user_info->pwd == NULL) {
-    perror("auth.error.missing_credentials");
-    exit(-1);
-  }
-
-  char usr_cmd[BUFFER_SIZE];
-  char pwd_cmd[BUFFER_SIZE];
-
-  sprintf(usr_cmd, "USER %s\r\n", user_info->usr);
-  sprintf(pwd_cmd, "PASS %s\r\n", user_info->pwd);
-
   char res[BUFFER_SIZE];
   char code[FTP_RES_SIZE];
 
@@ -71,6 +61,22 @@ int auth_login(const int socket_fd, user_info *user_info)
 
   memset(res, 0, BUFFER_SIZE);
   memset(code, 0, FTP_RES_SIZE);
+}
+
+int auth_login(const int socket_fd, user_info *user_info)
+{
+  if (user_info->usr == NULL || user_info->pwd == NULL) {
+    perror("auth.error.missing_credentials");
+    exit(-1);
+  }
+
+  char usr_cmd[BUFFER_SIZE];
+  char pwd_cmd[BUFFER_SIZE];
+
+  sprintf(usr_cmd, "USER %s\r\n", user_info->usr);
+  sprintf(pwd_cmd, "PASS %s\r\n", user_info->pwd);
+
+  auth_welcome(socket_fd);
 
   auth_request(user_info, usr_cmd, strlen(usr_cmd), NEED_PASSWORD, socket_fd);
   auth_request(user_info, pwd_cmd, strlen(pwd_cmd), LOGIN_SUCCESS, socket_fd);

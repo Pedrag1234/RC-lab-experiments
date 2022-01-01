@@ -19,10 +19,14 @@ It should take an argument that adopts the URL syntax, as described in RFC1738.
 
 #### Usage:
 
-`$ ftp://[<user>:<password>@]<host>/<url-path>`
+`$ ftp://[<user>:<password>@]<host>/<url-path> -[mode]`
   
+*Options:*
+-A: Active mode
+-P: Passive mode
+
 *Example:* 
 
-`$ ./download ftp://ftp.up.pt/pub/kodi/timestamp.txt`
+`$ ./download ftp://ftp.up.pt/pub/kodi/timestamp.txt -A`
 
 *Note:* The server is in the lab, to access it you need to be connected through the FEUP VPN.

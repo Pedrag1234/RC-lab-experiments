@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "connection.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "auth.h": "c"
     }
 }

@@ -11,3 +11,5 @@
 
 #define FTP_SERVER_PORT 21 
 #define FTP_DATA_PORT 20
+
+#define PASV_CMD "PASV\r\n"

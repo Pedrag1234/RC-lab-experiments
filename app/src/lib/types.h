@@ -29,5 +29,4 @@ struct user_info
     char ip[BUFFER_SIZE];
     char f_name[BUFFER_SIZE];
     char hostname[BUFFER_SIZE];
-    ftp_mode_t ftp_mode;
 };

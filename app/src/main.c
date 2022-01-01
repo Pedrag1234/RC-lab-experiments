@@ -1,15 +1,9 @@
-#include <stdio.h>
-#include <string.h>
-
-#include "lib/macros.h"
-#include "lib/types.h"
-#include "lib/utils/utils.h"
-#include "middleware/connection/connection.h"
-#include "middleware/auth/auth.h"
+#include "api/active/active.h"
+#include "api/passive/pasv.h"
 
 int main(int argc, char const *argv[])
 {
-    if (argc != 3)
+    if (argc < 2)
     {
         perror("app.error.args_missing");
         exit(1);
@@ -31,15 +25,19 @@ int main(int argc, char const *argv[])
     bool is_active = strcmp(token, "A") == 0;
     bool is_pasv = strcmp(token, "P") == 0; 
 
-    if (!is_pasv && !is_active) {
-        perror("app.error.args_mode");
-        exit(-1);
+    if (!is_pasv && !is_active)
+        selected_mode = PASV;
+    else
+        selected_mode = is_active ? ACTIVE : PASV;
+
+    switch (selected_mode) {
+        case ACTIVE:
+            // active_connect(&user_info);
+            break;
+        default:
+            pasv_connect(&user_info);
+            break;
     }
-
-    selected_mode = is_active ? ACTIVE : PASV;
-
-    int fd = init_connection(&user_info);
-    auth_login(fd, &user_info);
 
     return 0;
 }
