@@ -186,3 +186,11 @@ Nesta experiência foi a aplicação da configuração testada na experiência 3
 
 
 ## Conclusão
+
+Este trabalho alcançou os dois objetivos principais, com a aplicação de download com FTP e a configuração de uma rede para testar a aplicação.
+
+O cliente FTP foi implementado com sucesso, e é capaz de transferir diferentes ficheiros com tamanhos diferentes. Com o desenvolvimento deste programa, nós percebemos melhor este protocolo e como um protocolo oficial funciona, comparando com o que foi feito.
+
+A configuração da rede foi concluída com sucesso. Permitiu-nos perceber, num nível mais aprofundado, como uma rede funciona.
+
+Os objetivos dos guiões laboratoriais foram atingidos, e deixou-nos com uma perspetiva diferente do funcionamento de como as redes de computadores funcionam.
