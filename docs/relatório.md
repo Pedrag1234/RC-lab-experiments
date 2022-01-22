@@ -1,14 +1,44 @@
+![feup logo](feup_logo.png)
+---
+
+## Licenciatura em Engenharia Informática e Computação
+
+---
 # Redes de Computadores - Segundo Trabalho Laboratorial
 
-
-
 ## Índice
+
+# Table of Contents 
+
+- [Introdução](#introducao)
+- [Arquitetura](#arquitetura)
+- [Experiências](#experiencias)
+    -  [Experiência 1](experiencia_1)
+    -  [Experiência 2](experiencia_2)
+    -  [Experiência 3](experiencia_3)
+    -  [Experiência 4](experiencia_4)
+- [Conclusão](#conclusao)
+
 
 ## Introdução
 
 Este trabalho foi realizado no âmbito da cadeira de Redes de Computadores. O trabalho teve dois objetivos principais, o primeiro for o desenvolvimento de uma aplicação de download com FTP e o segundo objetivo foi a configuração de uma rede que seria utilizada para testar a aplicação. A configuração desta mesma rede consistiu configurar um router e um switch CISCO bem como as rotas nos diversos PC pertencentes a essa rede.
 
 ## Arquitetura
+
+A nossa aplicação de download FTP tem como base uma arquitetura monolitica composta por 3 packages: 
+
+### `api` 
+
+que contem a logica para realizar downloads no modo `passive` a partir de metodos que obteem a informacao do cliente, bem como o seu ip e port, efetuam uma coneccao e descarregam o ficheiro; 
+
+### `lib`
+
+onde vivem as macros e a definicao dos tipos, bem como helper methods uteis em varias seccoes do projeto; 
+
+### `middleware`
+
+este package serve como camada de ligacao entre a nossa API e a API do servidor nela existem dois diretorios: `auth` que funciona como camada de autenticacao e autorizacao; e `connection` que contem as funcoes que estabelecem e terminam uma nova ligacao, enviam pedidos e recebem respostas. 
 
 ## Experiências
 
