@@ -3,8 +3,16 @@
 
 ## Licenciatura em Engenharia Informática e Computação
 
+
 ---
 # Redes de Computadores - Segundo Trabalho Laboratorial
+
+
+#### Contributors
+
+- [Tiago Lima Rocha](mailto:up201406679@edu.fe.up.pt) up201406679
+- [Pedro Azevedo](mailto:up201603816@edu.fe.up.pt) up201603816
+- [José Rodrigues](mailto:up201809590@edu.fc.up.pt) up201809590
 
 ## Índice
 
@@ -18,6 +26,8 @@
     -  [Experiência 3](experiencia_3)
     -  [Experiência 4](experiencia_4)
 - [Conclusão](#conclusao)
+
+
 
 
 ## Introdução
