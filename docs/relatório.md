@@ -40,6 +40,20 @@ onde vivem as macros e a definicao dos tipos, bem como helper methods uteis em v
 
 este package serve como camada de ligacao entre a nossa API e a API do servidor nela existem dois diretorios: `auth` que funciona como camada de autenticacao e autorizacao; e `connection` que contem as funcoes que estabelecem e terminam uma nova ligacao, enviam pedidos e recebem respostas. 
 
+#### Utilizacao:
+
+`$ ftp://[<user>:<password>@]<host>/<url-path> -[mode]`
+  
+*Options:*
+-A: Active mode
+-P: Passive mode
+
+*Example:* 
+
+`$ ./download ftp://ftp.up.pt/pub/kodi/timestamp.txt -A`
+
+*Note:* The server is in the lab, to access it you need to be connected through the FEUP VPN.
+
 ## Experiências
 
 ### Experiência 1
